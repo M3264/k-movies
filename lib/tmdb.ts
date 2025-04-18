@@ -39,7 +39,7 @@ export async function fetchGenres() {
 
 // Fetch movie details
 export async function fetchMovieDetails(id) {
-  const response = await fetch(`/api/tmdb/movie/${id}`)
+  const response = await fetch(`${BASE_URL}/api/tmdb/movie/${id}`)
 
   if (!response.ok) {
     throw new Error(`Failed to fetch movie details for ID: ${id}`)
@@ -50,7 +50,7 @@ export async function fetchMovieDetails(id) {
 
 // Fetch similar movies
 export async function fetchSimilarMovies(id) {
-  const response = await fetch(`/api/tmdb/movie/${id}/similar`)
+  const response = await fetch(`${BASE_URL}/api/tmdb/movie/${id}/similar`)
 
   if (!response.ok) {
     throw new Error(`Failed to fetch similar movies for ID: ${id}`)
@@ -62,7 +62,7 @@ export async function fetchSimilarMovies(id) {
 
 // Fetch movie credits
 export async function fetchMovieCredits(id) {
-  const response = await fetch(`/api/tmdb/movie/${id}/credits`)
+  const response = await fetch(`${BASE_URL}/api/tmdb/movie/${id}/credits`)
 
   if (!response.ok) {
     throw new Error(`Failed to fetch movie credits for ID: ${id}`)
@@ -73,7 +73,7 @@ export async function fetchMovieCredits(id) {
 
 // Search movies
 export async function searchMovies(query) {
-  const response = await fetch(`/api/tmdb/search?q=${encodeURIComponent(query)}`)
+  const response = await fetch(`${BASE_URL}/api/tmdb/search?q=${encodeURIComponent(query)}`)
 
   if (!response.ok) {
     throw new Error(`Failed to search movies for query: ${query}`)
@@ -85,7 +85,7 @@ export async function searchMovies(query) {
 
 // Fetch movies by genre
 export async function fetchMoviesByGenre(genreId) {
-  const response = await fetch(`/api/tmdb/genre/${genreId}`)
+  const response = await fetch(`${BASE_URL}/api/tmdb/genre/${genreId}`)
 
   if (!response.ok) {
     throw new Error(`Failed to fetch movies for genre ID: ${genreId}`)

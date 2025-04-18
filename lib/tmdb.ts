@@ -27,7 +27,7 @@ export async function fetchTopRatedMovies() {
 
 // Fetch movie genres
 export async function fetchGenres() {
-  const response = await fetch("/api/tmdb/genres")
+  const response = await fetch(`${BASE_URL}/api/tmdb/genres`)
 
   if (!response.ok) {
     throw new Error("Failed to fetch genres")

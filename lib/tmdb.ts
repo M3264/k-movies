@@ -2,7 +2,8 @@
 
 // Fetch trending movies
 export async function fetchTrendingMovies() {
-  const response = await fetch("/api/tmdb/trending")
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://v0-k-movies-website-design.vercel.app"
+  const response = await fetch(`${BASE_URL}/api/tmdb/trending`)
 
   if (!response.ok) {
     throw new Error("Failed to fetch trending movies")

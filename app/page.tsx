@@ -1,17 +1,41 @@
 // export const dynamic = "force-dynamic"
 
-import Link from "next/link"
+import React, { useEffect, useState } from "react"
 import { MovieCarousel } from "@/components/movie-carousel"
 import { HeroSection } from "@/components/hero-section"
 import { fetchTrendingMovies, fetchTopRatedMovies, fetchGenres } from "@/lib/tmdb"
 import { FloatingAction } from "@/components/floating-action"
 
-export default async function Home() {
-  const trendingMovies = await fetchTrendingMovies()
-  const topRatedMovies = await fetchTopRatedMovies()
-  const genres = await fetchGenres()
+export default function Home() {
+  const [trendingMovies, setTrendingMovies] = useState([])
+  const [topRatedMovies, setTopRatedMovies] = useState([])
+  const [genres, setGenres] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  // Select a featured movie from trending
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const trendingData = await fetchTrendingMovies()
+        const topRatedData = await fetchTopRatedMovies()
+        const genresData = await fetchGenres()
+
+        setTrendingMovies(trendingData)
+        setTopRatedMovies(topRatedData)
+        setGenres(genresData)
+      } catch (error) {
+        console.error("Error fetching data:", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+  if (loading) {
+    return <div>Loading...</div> // Or a loading spinner
+  }
+
   const featuredMovie = trendingMovies[0]
 
   return (

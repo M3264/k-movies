@@ -1,45 +1,18 @@
 'use client'
 
-// export const dynamic = "force-dynamic"
-
-import React, { useEffect, useState } from "react"
-import Link from "next/link"
+ import Link from "next/link"
 import { MovieCarousel } from "@/components/movie-carousel"
 import { HeroSection } from "@/components/hero-section"
 import { fetchTrendingMovies, fetchTopRatedMovies, fetchGenres } from "@/lib/tmdb"
 import { FloatingAction } from "@/components/floating-action"
 
-export default function Home() {
-  const [trendingMovies, setTrendingMovies] = useState([])
-  const [topRatedMovies, setTopRatedMovies] = useState([])
-  const [genres, setGenres] = useState([])
-  const [loading, setLoading] = useState(true)
+export default async function Home() {
+const trendingMovies = await fetchTrendingMovies()
+const topRatedMovies = await fetchTopRatedMovies()
+const genres = await fetchGenres()
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const trendingData = await fetchTrendingMovies()
-        const topRatedData = await fetchTopRatedMovies()
-        const genresData = await fetchGenres()
-
-        setTrendingMovies(trendingData)
-        setTopRatedMovies(topRatedData)
-        setGenres(genresData)
-      } catch (error) {
-        console.error("Error fetching data:", error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchData()
-  }, [])
-
-  if (loading) {
-    return <div>Loading...</div> // Or a loading spinner
-  }
-
-  const featuredMovie = trendingMovies[0]
+// Select a featured movie from trending
+const featuredMovie = trendingMovies[0]
 
   return (
     <div className="min-h-screen bg-black text-white">

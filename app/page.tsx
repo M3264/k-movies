@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"
+
 import Link from "next/link"
 import { MovieCarousel } from "@/components/movie-carousel"
 import { HeroSection } from "@/components/hero-section"

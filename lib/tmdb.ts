@@ -1,8 +1,8 @@
 // TMDB API functions that use our backend API routes
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://v0-k-movies-website-design.vercel.app"
 
 // Fetch trending movies
 export async function fetchTrendingMovies() {
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://v0-k-movies-website-design.vercel.app"
   const response = await fetch(`${BASE_URL}/api/tmdb/trending`)
 
   if (!response.ok) {
@@ -15,7 +15,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://v0-k-movies-websit
 
 // Fetch top rated movies
 export async function fetchTopRatedMovies() {
-  const response = await fetch("/api/tmdb/top-rated")
+  const response = await fetch(`${BASE_URL}/api/tmdb/top-rated`)
 
   if (!response.ok) {
     throw new Error("Failed to fetch top rated movies")
